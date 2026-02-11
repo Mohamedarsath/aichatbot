@@ -1,16 +1,28 @@
 import styles from './Header.module.css';
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Menu } from 'lucide-react';
 
 interface HeaderProps {
     onClearChat: () => void;
+    onToggleSidebar: () => void;
 }
 
-export const Header = ({ onClearChat }: HeaderProps) => {
+export const Header = ({ onClearChat, onToggleSidebar }: HeaderProps) => {
     return (
         <header className={styles.header}>
-            <h1 className={styles.title}>AI Chatbot</h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <button
+                    className={styles.iconButton}
+                    onClick={onToggleSidebar}
+                    aria-label="Toggle Sidebar"
+                >
+                    <Menu size={20} />
+                </button>
+                <h1 className={styles.title}>AI Chatbot</h1>
+            </div>
+
             <div className={styles.actions}>
+                <ThemeSwitcher />
                 <button
                     className={styles.iconButton}
                     onClick={() => {
@@ -22,7 +34,6 @@ export const Header = ({ onClearChat }: HeaderProps) => {
                 >
                     <Trash2 size={20} />
                 </button>
-                <ThemeSwitcher />
             </div>
         </header>
     );

@@ -18,31 +18,38 @@ export const ChatWindow = ({ messages, isLoading }: ChatWindowProps) => {
     const bottomRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+        // Small timeout to ensure DOM update is complete before scrolling
+        const timeoutId = setTimeout(() => {
+            bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }, 100)
+        return () => clearTimeout(timeoutId)
     }, [messages, isLoading])
 
     return (
         <div className={styles.chatWindow}>
             <div className={styles.messagesList}>
-                {messages.length === 0 && (
-                    <div className={styles.emptyState}>
-                        <h1>Hi, I'm Gemini.</h1>
-                        <p>How can I help you today?</p>
-                    </div>
-                )}
+                <div className={styles.contentContainer}>
+                    {messages.length === 0 && (
+                        <div className={styles.emptyState}>
+                            <h1>Hi, I'm AI.</h1>
+                            <p>How can I help you today?</p>
+                        </div>
+                    )}
 
-                {messages.map((msg, index) => (
-                    <MessageBubble
-                        key={msg.id}
-                        role={msg.role}
-                        content={msg.text}
-                        isLast={index === messages.length - 1}
-                    />
-                ))}
+                    {messages.map((msg, index) => (
+                        <MessageBubble
+                            key={msg.id}
+                            role={msg.role}
+                            content={msg.text}
+                            isLast={index === messages.length - 1}
+                        />
+                    ))}
 
-                {isLoading && <TypingIndicator />}
+                    {/* Invisible element to scroll to */}
+                    <div ref={bottomRef} style={{ height: '1px' }} />
 
-                <div ref={bottomRef} style={{ height: '1px' }} />
+                    {isLoading && <TypingIndicator />}
+                </div>
             </div>
         </div>
     )

@@ -1,8 +1,7 @@
 .inputContainer {
-    position: fixed;
+    position: sticky;
     bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
     padding: var(--spacing-lg);
     display: flex;
     justify-content: center;
@@ -12,7 +11,10 @@
 
 .inputWrapper {
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
+    /* Match ChatWindow contentContainer */
+    margin: 0 auto;
+    /* Center it */
     display: flex;
     align-items: flex-end;
     padding: var(--spacing-sm);

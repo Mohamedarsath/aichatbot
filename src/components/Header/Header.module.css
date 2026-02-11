@@ -11,6 +11,20 @@
     z-index: 100;
 }
 
+@media (min-width: 769px) {
+    /* Hide menu button on desktop if we want sidebar always visible */
+    /* Check Header.tsx structure to target specifically the menu button if strictly needed, 
+       but simplified: we can keep it visible or hide it. 
+       Usually sidebar toggles on desktop too? 
+       Let's keep it visible for flexibility, OR hide it if sidebar is fixed. 
+       
+       Let's make Sidebar collapsible on desktop? 
+       For now, user just asked for listing. Typically sidebar is always there on desktop.
+    */
+    /* If we want to hide the menu button on desktop because sidebar is always open: */
+    /* We need a specific class for the menu button or target it via n-th child/aria-label */
+}
+
 .title {
     font-size: 1.2rem;
     font-weight: 600;

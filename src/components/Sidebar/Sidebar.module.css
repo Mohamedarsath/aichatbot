@@ -1,0 +1,117 @@
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-app);
+    border-right: 1px solid var(--surface-glass-border);
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md);
+    position: sticky;
+    top: 0;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.newChatButton {
+    background: var(--surface-glass-highlight);
+    border: 1px solid var(--surface-glass-border);
+    color: var(--text-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    transition: all 0.2s ease;
+}
+
+.newChatButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sessionList {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.sessionItem {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 40px;
+}
+
+.sessionItem:hover {
+    background: var(--surface-glass);
+    color: var(--text-primary);
+}
+
+.sessionItem.active {
+    background: var(--accent-gradient);
+    color: white;
+}
+
+.deleteButton {
+    background: transparent;
+    border: none;
+    color: inherit;
+    opacity: 0;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.sessionItem:hover .deleteButton {
+    opacity: 0.7;
+}
+
+.deleteButton:hover {
+    opacity: 1 !important;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Overlay */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        background: var(--bg-app);
+        /* Solid background for mobile */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        backdrop-filter: blur(2px);
+    }
+}

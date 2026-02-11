@@ -76,3 +76,25 @@
     width: 20px;
     height: 20px;
 }
+
+@media (max-width: 600px) {
+    .inputContainer {
+        padding: var(--spacing-sm);
+    }
+
+    .inputWrapper {
+        padding: var(--spacing-xs);
+        border-radius: var(--radius-md);
+    }
+
+    .textarea {
+        font-size: 16px;
+        /* Prevent zoom on iOS */
+        padding: var(--spacing-sm);
+    }
+
+    .sendButton {
+        width: 36px;
+        height: 36px;
+    }
+}

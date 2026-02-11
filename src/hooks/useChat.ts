@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
 interface Message {
@@ -10,9 +10,22 @@ interface Message {
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 export const useChat = () => {
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const saved = localStorage.getItem('chat_history');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  // Persist messages whenever they change
+  useEffect(() => {
+    localStorage.setItem('chat_history', JSON.stringify(messages));
+  }, [messages]);
+
+  const clearChat = useCallback(() => {
+    setMessages([]);
+    localStorage.removeItem('chat_history');
+  }, []);
 
   const sendMessage = useCallback(async (content: string) => {
     setIsLoading(true)
@@ -90,6 +103,7 @@ export const useChat = () => {
   return {
     messages,
     sendMessage,
+    clearChat,
     isLoading,
     error
   }

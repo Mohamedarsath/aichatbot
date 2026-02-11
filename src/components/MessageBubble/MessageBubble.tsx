@@ -1,4 +1,6 @@
 import { useRef, useEffect } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import styles from './MessageBubble.module.css'
 
 interface MessageBubbleProps {
@@ -22,7 +24,17 @@ export const MessageBubble = ({ role, content, isLast }: MessageBubbleProps) => 
             className={`${styles.container} ${role === 'user' ? styles.user : styles.model} animate-fade-in`}
         >
             <div className={styles.bubble}>
-                {content}
+                {role === 'model' ? (
+                    <div className={styles.markdownContent}>
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                        >
+                            {content}
+                        </ReactMarkdown>
+                    </div>
+                ) : (
+                    content
+                )}
             </div>
         </div>
     )

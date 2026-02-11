@@ -1,0 +1,78 @@
+.inputContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to top, var(--bg-app) 20%, transparent);
+    z-index: 10;
+}
+
+.inputWrapper {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--duration-fast);
+}
+
+.inputWrapper:focus-within {
+    border-color: rgba(161, 140, 209, 0.5);
+}
+
+.textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    resize: none;
+    outline: none;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+.sendButton {
+    background: var(--accent-gradient);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    margin-left: var(--spacing-sm);
+    transition: transform var(--duration-fast), opacity var(--duration-fast);
+    flex-shrink: 0;
+}
+
+.sendButton:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+.sendButton:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.sendButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+.sendButton svg {
+    width: 20px;
+    height: 20px;
+}
